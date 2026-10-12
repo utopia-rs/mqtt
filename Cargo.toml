@@ -1,0 +1,32 @@
+[package]
+name = "utopia-mqtt"
+description = "Building blocks for MQTT 5.0 and 3.1.1 brokers: the packet codec, a subscription trie, per-connection delivery state, a broker over adapters (Tokio on TCP, TLS and WebSocket; in-memory) with keep-alive timers, and a client."
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+license = "BSD-3-Clause"
+
+[features]
+default = ["tokio"]
+# The network adapter (`Tokio`: TCP, TLS and WebSocket listeners), the timing
+# wheel's heartbeat and the client, on tokio, tokio-rustls and
+# tokio-tungstenite.
+tokio = ["dep:tokio", "dep:tokio-rustls", "dep:rustls", "dep:tokio-tungstenite", "dep:futures-util"]
+
+[dependencies]
+foldhash = "0.2"
+indexmap = "2"
+php-std = { version = "0.1.0", git = "https://github.com/utopia-rs/php-std" }
+thiserror = "2"
+utopia-telemetry = { version = "0.1.0", git = "https://github.com/utopia-rs/telemetry", default-features = false }
+futures-util = { version = "0.3", optional = true, default-features = false, features = ["std", "async-await-macro", "sink"] }
+rustls = { version = "0.23", optional = true, default-features = false, features = ["ring", "std", "tls12"] }
+tokio = { version = "1", optional = true, features = ["rt-multi-thread", "macros", "net", "time", "sync", "signal", "rt", "io-util"] }
+tokio-rustls = { version = "0.26", optional = true, default-features = false, features = ["ring", "tls12"] }
+tokio-tungstenite = { version = "0.30", optional = true, default-features = false, features = ["connect", "handshake", "rustls-tls-webpki-roots"] }
+
+[dev-dependencies]
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "time", "sync", "signal", "rt", "io-util"] }
+
+[package.metadata.utopia]
+php-sync = "809d2819d7da00d8b2f486e3bcb4c98a5265e950"
