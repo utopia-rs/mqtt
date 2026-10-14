@@ -29,4 +29,4 @@ tokio-tungstenite = { version = "0.30", optional = true, default-features = fals
 tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "time", "sync", "signal", "rt", "io-util"] }
 
 [package.metadata.utopia]
-php-sync = "52f82b9cd50d88a7f99d9914835135e36578544f"
+php-sync = "8dcc039b80b2606a78505e96201f55240acae70c"
